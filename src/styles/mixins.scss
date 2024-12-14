@@ -1,0 +1,27 @@
+// @function clampSize($min, $max) {
+//   @return max(#{$min}px, #{$max});
+// }
+
+@mixin dekstop {
+  @media (min-width: 920px) and (max-width: 1399px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 919px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 530px) {
+    @content;
+  }
+}
+
+@mixin event-selectors {
+  @media (min-width: 920px) {
+    @content;
+  }
+}

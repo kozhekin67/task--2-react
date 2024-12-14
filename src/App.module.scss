@@ -1,0 +1,23 @@
+@import 'src/styles/mixins.scss';
+
+.App {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  padding: 0 20px;
+  margin: 50px auto 200px;
+
+  &__title {
+    margin-top: 50px;
+    font-family: Akrobat-Thin, sans-serif;
+    font-size: 120px;
+    font-weight: 400;
+    text-align: center;
+
+    @include tablet {
+      margin-top: 20px;
+      font-size: 80px;
+      font-weight: 200;
+    }
+  }
+}

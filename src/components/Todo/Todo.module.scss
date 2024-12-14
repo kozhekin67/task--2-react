@@ -1,0 +1,17 @@
+.task {
+  display: flex;
+  align-items: center;
+  width: 1000px;
+  margin-top: 10px;
+  padding: 5px 70px;
+  font-family: Akrobat-Thin, sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  word-break: break-all;
+  border: 2px solid #00fa9a;
+  border-radius: 10px;
+
+  &__text {
+    text-align: left;
+  }
+}
