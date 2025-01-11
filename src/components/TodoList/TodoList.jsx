@@ -5,9 +5,14 @@ import Todo from '../Todo/Todo';
 
 // import s from './TodoForm.module.scss';
 
-const TodoList = ({ todos, deleteTodo }) => {
-  return todos.map((todo, index) => (
-    <Todo key={index} todo={todo} index={index} deleteTodo={deleteTodo} />
+const TodoList = ({ todos, deleteTodo, doneTodo }) => {
+  return todos.map((todo) => (
+    <Todo
+      key={todo.id}
+      todo={todo}
+      deleteTodo={deleteTodo}
+      doneTodo={doneTodo}
+    />
   ));
 };
 

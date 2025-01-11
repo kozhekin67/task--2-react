@@ -1,0 +1,34 @@
+.customCheckbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox {
+  display: none; /* Скрываем стандартный чекбокс */
+}
+
+.block {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  margin-right: 8px;
+  position: relative;
+}
+
+.checkbox:checked + .block {
+  background-color: #007bff;
+}
+
+.checkbox:checked + .block::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  width: 4px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
