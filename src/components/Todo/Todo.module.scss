@@ -46,6 +46,22 @@
   &:hover .delete {
     display: block;
   }
+
+  & .checkboxBlock {
+    border-color: #51c48c;
+  }
+
+  & .checkboxBlock::after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 1px;
+    width: 7px;
+    height: 18px;
+    border: solid #51c48c;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
 }
 
 .customCheckbox {
@@ -68,22 +84,6 @@
   margin-right: 8px;
   position: relative;
   transition: border 200ms;
-}
-
-.checkbox:checked + .checkboxBlock {
-  border-color: #51c48c;
-}
-
-.checkbox:checked + .checkboxBlock::after {
-  content: '';
-  position: absolute;
-  left: 8px;
-  top: 1px;
-  width: 7px;
-  height: 18px;
-  border: solid #51c48c;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
 }
 
 .delete {
