@@ -13,4 +13,12 @@
     font-weight: 600;
     border-radius: 10px;
   }
+
+  &__element_invisible {
+    visibility: hidden;
+    padding: 7px;
+    font-family: Akrobat-Thin, sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+  }
 }

@@ -4,25 +4,38 @@ import Button from '../Button/Button';
 import cx from 'classnames';
 import s from './TodosActions.module.scss';
 
-const TodosActions = ({ deleteDoneTodos, todosCounter }) => {
+const TodosActions = ({
+  deleteDoneTodos,
+  todosCounter,
+  donetodosCounter,
+  filterTodos,
+}) => {
   return (
     <div className={cx(s.bottomPanel)}>
       <div className={cx(s.bottomPanel__element)}>
         <span>{`Items left ${todosCounter}`}</span>
       </div>
-      <Button className={cx(s.bottomPanel__element)} text="All" id="all" />
+      <Button
+        className={cx(s.bottomPanel__element)}
+        text="All"
+        onClick={() => filterTodos('all')}
+      />
       <Button
         className={cx(s.bottomPanel__element)}
         text="Active"
-        id="active"
+        onClick={() => filterTodos('active')}
       />
       <Button
         className={cx(s.bottomPanel__element)}
         text="Completed"
-        id="completed"
+        onClick={() => filterTodos('completed')}
       />
       <Button
-        className={cx(s.bottomPanel__element)}
+        className={cx(
+          donetodosCounter
+            ? s.bottomPanel__element
+            : s.bottomPanel__element_invisible
+        )}
         text="Clear completed"
         onClick={deleteDoneTodos}
       />

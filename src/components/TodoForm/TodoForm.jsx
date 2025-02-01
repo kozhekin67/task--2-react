@@ -5,21 +5,24 @@ import cx from 'classnames';
 
 import s from './TodoForm.module.scss';
 
-const TodoForm = ({ addTodo, todos, doneTodos }) => {
+const TodoForm = ({ addTodo, todos, doneTodos, doneTodosAll }) => {
   const [text, setText] = useState('');
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    addTodo(text);
-    setText('');
+    if (text.trim() !== '') {
+      addTodo(text);
+      setText('');
+    }
   };
 
   return (
     <>
       {todos.length !== 0 && (
-        <label className={cx(s.checkAllTask, s.checkAllTask)}>
+        <label className={cx(s.checkAllTask)}>
           <Checkbox
             className={cx(s.checkAllTask__customButton)}
             onchange={(event) => doneTodos(event)}
+            checked={doneTodosAll}
           />
           <span className={cx(s.checkAllTask__arrowButton)}></span>
         </label>
