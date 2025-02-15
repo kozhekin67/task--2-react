@@ -8,6 +8,7 @@ const TodosActions = ({
   deleteDoneTodos,
   todosCounter,
   donetodosCounter,
+  filter,
   filterTodos,
 }) => {
   return (
@@ -16,17 +17,29 @@ const TodosActions = ({
         <span>{`Items left ${todosCounter}`}</span>
       </div>
       <Button
-        className={cx(s.bottomPanel__element)}
+        className={cx(
+          filter === 'all'
+            ? s.bottomPanel__element_active
+            : s.bottomPanel__element
+        )}
         text="All"
         onClick={() => filterTodos('all')}
       />
       <Button
-        className={cx(s.bottomPanel__element)}
+        className={cx(
+          filter === 'active'
+            ? s.bottomPanel__element_active
+            : s.bottomPanel__element
+        )}
         text="Active"
         onClick={() => filterTodos('active')}
       />
       <Button
-        className={cx(s.bottomPanel__element)}
+        className={cx(
+          filter === 'completed'
+            ? s.bottomPanel__element_active
+            : s.bottomPanel__element
+        )}
         text="Completed"
         onClick={() => filterTodos('completed')}
       />

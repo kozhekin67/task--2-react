@@ -6,17 +6,12 @@ import s from './Input.module.scss';
 
 const Input = (props) => {
   const { className, placeholder } = props;
-  // const inputRef = useRef(null);
-  // useEffect(() => {
-  //   inputRef.current.focus();
-  // }, []);
 
   return (
     <input
       {...props}
       className={cx(s.root, className)}
       placeholder={placeholder}
-      // ref={inputRef}
     />
   );
 };

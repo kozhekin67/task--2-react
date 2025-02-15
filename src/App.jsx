@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TodoForm from './components/TodoForm/TodoForm';
 import TodoList from './components/TodoList/TodoList';
 import TodosActions from './components/TodosActions/TodosActions';
@@ -10,9 +10,22 @@ import cx from 'classnames';
 import s from './App.module.scss';
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [filter, setFilter] = useState('all');
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem('todos');
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
+  const [filter, setFilter] = useState(() => {
+    return localStorage.getItem('todoFilter') || 'all';
+  });
   const [taskEditor, setTaskEditor] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
+  useEffect(() => {
+    localStorage.setItem('todoFilter', filter);
+  }, [filter]);
 
   const addTodoHandler = (text) => {
     const newTodo = {
@@ -20,7 +33,6 @@ function App() {
       done: false,
       id: Date.now(),
     };
-    console.log(newTodo);
     setTodos([...todos, newTodo]);
   };
 
@@ -98,6 +110,7 @@ function App() {
           todosCounter={todosCounterHandler}
           donetodosCounter={doneTodosCounterHandler}
           filterTodos={filterTodosHandler}
+          filter={filter}
         />
       )}
     </div>

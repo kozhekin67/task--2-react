@@ -4,7 +4,7 @@ import cx from 'classnames';
 import { ReactComponent as Delete } from '../../svg/Delete.svg';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
-import Input from '../Input/Input';
+// import Input from '../Input/Input';
 
 import s from './Todo.module.scss';
 
@@ -46,7 +46,7 @@ const Todo = ({
         {todo.text}
       </div>
       {taskEdit === todo.id && (
-        <Input
+        <textarea
           className={s.editTodo}
           value={newText}
           onChange={(event) => setNewText(event.target.value)}
