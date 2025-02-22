@@ -10,7 +10,6 @@ const todoSlice = createSlice({
   reducers: {
     addTodo(state, action) {
       console.log(state);
-      console.log(action);
       state.todos.push({
         text: action.payload.text.replace(/\s+/g, ' ').trim(),
         done: false,

@@ -2,6 +2,7 @@ import { React } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { doneTodos } from '../..//store/todoSlice';
+import Input from '../Input/Input';
 import Checkbox from '../Checkbox/Checkbox';
 
 import cx from 'classnames';
@@ -39,12 +40,11 @@ const TodoForm = ({ text, handleInput, addTodo }) => {
         </label>
       )}
       <form className={cx(s.formGroup)} onSubmit={onSubmitHandler}>
-        <input
-          type="text"
+        <Input
+          className={cx(s.formGroup__taskInput)}
           placeholder="What needs to be done?"
           value={text}
           onChange={(e) => handleInput(e.target.value)}
-          className={cx(s.formGroup__taskInput)}
         />
       </form>
     </>

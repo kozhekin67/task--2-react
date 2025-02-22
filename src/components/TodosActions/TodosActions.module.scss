@@ -1,7 +1,9 @@
+@import 'src/styles/mixins.scss';
+
 .bottomPanel {
   display: flex;
   justify-content: space-between;
-  width: 1000px;
+  width: 100%;
   margin-top: 10px;
 
   &__element {
@@ -13,6 +15,10 @@
     font-weight: 600;
     border: 1px solid #51c48c;
     border-radius: 10px;
+
+    @include tablet {
+      font-size: 15px;
+    }
   }
 
   &__element_active {
@@ -23,6 +29,10 @@
     font-size: 30px;
     font-weight: 600;
     border-radius: 10px;
+
+    @include tablet {
+      font-size: 15px;
+    }
   }
 
   &__element_invisible {
@@ -31,5 +41,9 @@
     font-family: Akrobat-Thin, sans-serif;
     font-size: 30px;
     font-weight: 600;
+
+    @include tablet {
+      font-size: 15px;
+    }
   }
 }

@@ -4,8 +4,9 @@
   position: relative;
   width: 100%;
   max-width: 960px;
-  padding: 0 20px;
-  margin: 50px auto 200px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
 
   &__title {
     margin-top: 50px;
@@ -16,7 +17,7 @@
 
     @include tablet {
       margin-top: 20px;
-      font-size: 80px;
+      font-size: 50px;
       font-weight: 200;
     }
   }

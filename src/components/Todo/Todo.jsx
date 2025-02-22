@@ -7,7 +7,6 @@ import { ReactComponent as Delete } from '../../svg/Delete.svg';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
 import Textarea from '../Textarea/Textarea';
-// import Input from '../Input/Input';
 
 import s from './Todo.module.scss';
 

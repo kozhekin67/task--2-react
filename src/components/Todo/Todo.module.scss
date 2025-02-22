@@ -1,8 +1,10 @@
+@import 'src/styles/mixins.scss';
+
 .task {
   position: relative;
   display: flex;
   align-items: center;
-  width: 1000px;
+  width: 100%;
   margin-top: 10px;
   padding: 10px 70px;
   font-family: Akrobat-Thin, sans-serif;
@@ -12,6 +14,10 @@
   border: 2px solid black;
   border-radius: 10px;
   transition: border 200ms;
+
+  @include tablet {
+    font-size: 20px;
+  }
 
   &:hover .delete {
     display: block;
@@ -28,7 +34,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: 1000px;
+  width: 100%;
   margin-top: 10px;
   padding: 10px 70px;
   font-family: Akrobat-Thin, sans-serif;
@@ -38,6 +44,10 @@
   border: 2px solid #51c48c;
   border-radius: 10px;
   transition: border 200ms;
+
+  @include tablet {
+    font-size: 20px;
+  }
 
   & .text {
     width: 100%;
@@ -102,7 +112,7 @@
 
 .editTodo {
   position: absolute;
-  width: 85.88%;
+  width: 84.7%;
   height: 100%;
   padding: 10px 0;
   display: block;
