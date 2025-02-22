@@ -1,17 +1,28 @@
-import { useState, React } from 'react';
+import { React } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { doneTodos } from '../..//store/todoSlice';
 import Checkbox from '../Checkbox/Checkbox';
 
 import cx from 'classnames';
 
 import s from './TodoForm.module.scss';
 
-const TodoForm = ({ addTodo, todos, doneTodos, doneTodosAll }) => {
-  const [text, setText] = useState('');
+const TodoForm = ({ text, handleInput, addTodo }) => {
+  const todos = useSelector((state) => state.todos.todos);
+  const dispatch = useDispatch();
+
+  const doneTodosHandler = (event) => {
+    dispatch(doneTodos({ checked: event.target.checked }));
+  };
+
+  const doneTodosAll = todos.length > 0 && todos.every((todo) => todo.done);
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (text.trim() !== '') {
       addTodo(text);
-      setText('');
+      handleInput('');
     }
   };
 
@@ -21,7 +32,7 @@ const TodoForm = ({ addTodo, todos, doneTodos, doneTodosAll }) => {
         <label className={cx(s.checkAllTask)}>
           <Checkbox
             className={cx(s.checkAllTask__customButton)}
-            onchange={(event) => doneTodos(event)}
+            onchange={(event) => doneTodosHandler(event)}
             checked={doneTodosAll}
           />
           <span className={cx(s.checkAllTask__arrowButton)}></span>
@@ -32,7 +43,7 @@ const TodoForm = ({ addTodo, todos, doneTodos, doneTodosAll }) => {
           type="text"
           placeholder="What needs to be done?"
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => handleInput(e.target.value)}
           className={cx(s.formGroup__taskInput)}
         />
       </form>

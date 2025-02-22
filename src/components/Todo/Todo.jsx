@@ -1,29 +1,38 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import cx from 'classnames';
 
+import { deleteTodo, doneTodo, editTextTodo } from '../..//store/todoSlice';
 import { ReactComponent as Delete } from '../../svg/Delete.svg';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
+import Textarea from '../Textarea/Textarea';
 // import Input from '../Input/Input';
 
 import s from './Todo.module.scss';
 
-const Todo = ({
-  todo,
-  deleteTodo,
-  doneTodo,
-  openingEditor,
-  taskEdit,
-  editNewText,
-}) => {
-  const [newText, setNewText] = useState(todo.text);
+const Todo = ({ id, text, done }) => {
+  const [taskEditor, setTaskEditor] = useState(null);
+
+  const dispatch = useDispatch();
+  const openingEditorHandler = (id) => {
+    setTaskEditor(id);
+    setNewText(text.replace(/\s+/g, ' ').trim());
+  };
+  const [newText, setNewText] = useState(text);
+
+  const editTextTodoHandler = (id, newText) => {
+    const cleanedText = newText.replace(/\s+/g, ' ').trim();
+
+    dispatch(editTextTodo({ id, newText: cleanedText }));
+  };
 
   const closingEditor = () => {
     if (newText !== '') {
-      editNewText(todo.id, newText);
-      openingEditor(null);
+      editTextTodoHandler(id, newText);
+      openingEditorHandler(null);
     } else {
-      deleteTodo(todo.id);
+      deleteTodo(id);
     }
   };
 
@@ -31,22 +40,28 @@ const Todo = ({
     if (event.key === 'Enter') {
       closingEditor();
     } else if (event.key === 'Escape') {
-      openingEditor(null);
-      setNewText(todo.text);
+      openingEditorHandler(null);
+      setNewText(text);
     }
   };
 
   return (
-    <div className={cx(todo.done ? s.task_done : s.task)}>
+    <div className={cx(done ? s.task_done : s.task)}>
       <label className={s.customCheckbox}>
-        <Checkbox className={s.checkbox} onchange={() => doneTodo(todo.id)} />
+        <Checkbox
+          className={s.checkbox}
+          onchange={() => dispatch(doneTodo({ id }))}
+        />
         <p className={s.checkboxBlock}></p>
       </label>
-      <div className={cx(s.text)} onDoubleClick={() => openingEditor(todo.id)}>
-        {todo.text}
+      <div
+        className={cx(s.text)}
+        onDoubleClick={() => openingEditorHandler(id)}
+      >
+        {text}
       </div>
-      {taskEdit === todo.id && (
-        <textarea
+      {taskEditor === id && (
+        <Textarea
           className={s.editTodo}
           value={newText}
           onChange={(event) => setNewText(event.target.value)}
@@ -58,12 +73,10 @@ const Todo = ({
       <Button
         className={s.delete}
         image={<Delete className={s.delete__icon} />}
-        onClick={() => deleteTodo(todo.id)}
+        onClick={() => dispatch(deleteTodo({ id }))}
       />
     </div>
   );
 };
-
-Todo.defaultProps = {};
 
 export default Todo;

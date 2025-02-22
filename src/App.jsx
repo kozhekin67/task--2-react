@@ -1,4 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {
+  addTodo,
+  deleteDoneTodos,
+  setFilter,
+  selectFilteredTodos,
+} from './store/todoSlice';
+
 import TodoForm from './components/TodoForm/TodoForm';
 import TodoList from './components/TodoList/TodoList';
 import TodosActions from './components/TodosActions/TodosActions';
@@ -10,100 +19,31 @@ import cx from 'classnames';
 import s from './App.module.scss';
 
 function App() {
-  const [todos, setTodos] = useState(() => {
-    const savedTodos = localStorage.getItem('todos');
-    return savedTodos ? JSON.parse(savedTodos) : [];
-  });
-  const [filter, setFilter] = useState(() => {
-    return localStorage.getItem('todoFilter') || 'all';
-  });
-  const [taskEditor, setTaskEditor] = useState(null);
+  const [text, setText] = useState('');
 
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
+  const todos = useSelector((state) => state.todos.todos);
+  const filter = useSelector((state) => state.todos.filter);
+  const filteredTodos = useSelector(selectFilteredTodos);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    localStorage.setItem('todoFilter', filter);
-  }, [filter]);
-
-  const addTodoHandler = (text) => {
-    const newTodo = {
-      text: text,
-      done: false,
-      id: Date.now(),
-    };
-    setTodos([...todos, newTodo]);
+  const addTodoHandler = () => {
+    dispatch(addTodo({ text }));
   };
-
-  const deleteTodoHandler = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
-
-  const doneTodoHandler = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : { ...todo }
-      )
-    );
-  };
-
-  const doneTodosHandler = (event) => {
-    setTodos(
-      todos.map((todo) =>
-        event.target.checked
-          ? { ...todo, done: (todo.done = true) }
-          : { ...todo, done: (todo.done = false) }
-      )
-    );
-  };
-
-  const doneTodosAll = todos.length > 0 && todos.every((todo) => todo.done);
 
   const deleteDoneTodosHandler = () => {
-    setTodos(todos.filter((todo) => !todo.done));
+    dispatch(deleteDoneTodos());
   };
 
   const todosCounterHandler = todos.filter((todo) => !todo.done).length;
-
   const doneTodosCounterHandler = todos.filter((todo) => todo.done).length;
 
-  const filterTodosHandler = (newFilter) => setFilter(newFilter);
-
-  const filteredTodos = todos.filter((todo) => {
-    if (filter === 'active') return !todo.done;
-    if (filter === 'completed') return todo.done;
-    return true;
-  });
-
-  // редактирование задачи
-  const openingEditorHandler = (id) => setTaskEditor(id);
-
-  const editNewTextHandler = (id, newText) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, text: newText } : { ...todo }
-      )
-    );
-  };
+  const filterTodosHandler = (newFilter) => dispatch(setFilter(newFilter));
 
   return (
     <div className={cx(s.App)}>
       <h1 className={cx(s.App__title)}>Todo List</h1>
-      <TodoForm
-        todos={todos}
-        addTodo={addTodoHandler}
-        doneTodos={doneTodosHandler}
-        doneTodosAll={doneTodosAll}
-      />
-      <TodoList
-        todos={filteredTodos}
-        deleteTodo={deleteTodoHandler}
-        doneTodo={doneTodoHandler}
-        openingEditor={openingEditorHandler}
-        taskEdit={taskEditor}
-        editNewText={editNewTextHandler}
-      />
+      <TodoForm addTodo={addTodoHandler} text={text} handleInput={setText} />
+      <TodoList todos={filteredTodos} />
       {todos.length > 0 && (
         <TodosActions
           deleteDoneTodos={deleteDoneTodosHandler}

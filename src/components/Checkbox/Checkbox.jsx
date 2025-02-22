@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import s from './Checkbox.module.scss';
 
-const Checkbox = ({ className, id, onchange, checked }) => {
+const Checkbox = ({ className, id, onchange, checked = false }) => {
   return (
     <input
       id={id}
@@ -18,11 +18,7 @@ const Checkbox = ({ className, id, onchange, checked }) => {
 
 Checkbox.propTypes = {
   className: string,
-  id: 'string',
-};
-
-Checkbox.defaultProps = {
-  type: 'checkbox',
+  id: string,
 };
 
 export default Checkbox;
