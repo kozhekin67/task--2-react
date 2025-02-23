@@ -28,7 +28,7 @@ const TodoForm = ({ text, handleInput, addTodo }) => {
   };
 
   return (
-    <>
+    <div className={s.root}>
       {todos.length !== 0 && (
         <label className={cx(s.checkAllTask)}>
           <Checkbox
@@ -47,7 +47,7 @@ const TodoForm = ({ text, handleInput, addTodo }) => {
           onChange={(e) => handleInput(e.target.value)}
         />
       </form>
-    </>
+    </div>
   );
 };
 

@@ -53,10 +53,7 @@ const Todo = ({ id, text, done }) => {
         />
         <p className={s.checkboxBlock}></p>
       </label>
-      <div
-        className={cx(s.text)}
-        onDoubleClick={() => openingEditorHandler(id)}
-      >
+      <div className={s.text} onDoubleClick={() => openingEditorHandler(id)}>
         {text}
         {taskEditor === id && (
           <Textarea
