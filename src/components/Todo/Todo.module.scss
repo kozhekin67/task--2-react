@@ -24,6 +24,7 @@
   }
 
   & .text {
+    position: relative;
     width: 100%;
     height: 100%;
     transition: color 200ms;
@@ -50,6 +51,7 @@
   }
 
   & .text {
+    position: relative;
     width: 100%;
     height: 100%;
     text-decoration: line-through;
@@ -105,16 +107,22 @@
   position: absolute;
   right: 22px;
   transition: transform 200ms;
-}
-.delete:hover {
-  transform: scale(1.3);
+
+  &:hover {
+    transform: scale(1.3);
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .editTodo {
   position: absolute;
-  width: 84.7%;
+  top: 0;
+  width: 100%;
   height: 100%;
-  padding: 10px 0;
   display: block;
   background-color: white;
   color: #fe7d04;

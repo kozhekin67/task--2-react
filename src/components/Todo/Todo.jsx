@@ -58,17 +58,18 @@ const Todo = ({ id, text, done }) => {
         onDoubleClick={() => openingEditorHandler(id)}
       >
         {text}
+        {taskEditor === id && (
+          <Textarea
+            className={s.editTodo}
+            value={newText}
+            onChange={(event) => setNewText(event.target.value)}
+            onKeyDown={handleKeyDown}
+            onBlur={closingEditor}
+            autoFocus
+          />
+        )}
       </div>
-      {taskEditor === id && (
-        <Textarea
-          className={s.editTodo}
-          value={newText}
-          onChange={(event) => setNewText(event.target.value)}
-          onKeyDown={handleKeyDown}
-          onBlur={closingEditor}
-          autoFocus
-        />
-      )}
+
       <Button
         className={s.delete}
         image={<Delete className={s.delete__icon} />}
