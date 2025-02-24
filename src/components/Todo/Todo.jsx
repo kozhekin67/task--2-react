@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import cx from 'classnames';
 
 import { deleteTodo, doneTodo, editTextTodo } from '../..//store/todoSlice';
+import { formattedText } from '../../utils/formattedText';
 import { ReactComponent as Delete } from '../../svg/Delete.svg';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
@@ -16,14 +17,14 @@ const Todo = ({ id, text, done }) => {
   const dispatch = useDispatch();
   const openingEditorHandler = (id) => {
     setTaskEditor(id);
-    setNewText(text.replace(/\s+/g, ' ').trim());
+    formattedText(text);
+    setNewText(text);
   };
+
   const [newText, setNewText] = useState(text);
 
   const editTextTodoHandler = (id, newText) => {
-    const cleanedText = newText.replace(/\s+/g, ' ').trim();
-
-    dispatch(editTextTodo({ id, newText: cleanedText }));
+    dispatch(editTextTodo({ id, newText: formattedText(newText) }));
   };
 
   const closingEditor = () => {
@@ -31,16 +32,21 @@ const Todo = ({ id, text, done }) => {
       editTextTodoHandler(id, newText);
       openingEditorHandler(null);
     } else {
-      deleteTodo(id);
+      dispatch(deleteTodo({ id }));
     }
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      closingEditor();
-    } else if (event.key === 'Escape') {
-      openingEditorHandler(null);
-      setNewText(text);
+    switch (event.key) {
+      case 'Enter':
+        closingEditor();
+        break;
+      case 'Escape':
+        openingEditorHandler(null);
+        setNewText(text);
+        break;
+      default:
+        break;
     }
   };
 

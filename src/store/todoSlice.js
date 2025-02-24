@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { formattedText } from '../utils/formattedText';
 
 const todoSlice = createSlice({
   name: 'todos',
@@ -11,7 +12,7 @@ const todoSlice = createSlice({
     addTodo(state, action) {
       console.log(state);
       state.todos.push({
-        text: action.payload.text.replace(/\s+/g, ' ').trim(),
+        text: formattedText(action.payload.text),
         done: false,
         id: Date.now(),
       });
@@ -66,9 +67,14 @@ export const {
 
 export const selectFilteredTodos = (state) => {
   const { todos, filter } = state.todos;
-  if (filter === 'active') return todos.filter((todo) => !todo.done);
-  if (filter === 'completed') return todos.filter((todo) => todo.done);
-  return todos;
+  switch (filter) {
+    case 'active':
+      return todos.filter((todo) => !todo.done);
+    case 'completed':
+      return todos.filter((todo) => todo.done);
+    default:
+      return todos;
+  }
 };
 
 export default todoSlice.reducer;

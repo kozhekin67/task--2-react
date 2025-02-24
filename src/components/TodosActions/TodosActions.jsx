@@ -1,8 +1,8 @@
 import React from 'react';
+import cx from 'classnames';
 
 import Button from '../Button/Button';
 
-import cx from 'classnames';
 import s from './TodosActions.module.scss';
 
 const TodosActions = ({
@@ -13,8 +13,8 @@ const TodosActions = ({
   filterTodos,
 }) => {
   return (
-    <div className={cx(s.bottomPanel)}>
-      <div className={cx(s.bottomPanel__element)}>
+    <div className={s.bottomPanel}>
+      <div className={s.bottomPanel__element}>
         <span>{`Items left ${todosCounter}`}</span>
       </div>
       <Button

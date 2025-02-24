@@ -1,4 +1,5 @@
 @import 'src/styles/mixins.scss';
+@import 'src/styles/colors.scss';
 
 .bottomPanel {
   display: flex;
@@ -7,14 +8,13 @@
   margin-top: 10px;
 
   &__element {
-    background-color: white;
+    background-color: $white;
+    border: 1px solid $green;
+    border-radius: 10px;
     padding: 7px;
-    color: #51c48c;
-    font-family: Akrobat-Thin, sans-serif;
+    color: $green;
     font-size: 30px;
     font-weight: 600;
-    border: 1px solid #51c48c;
-    border-radius: 10px;
 
     @include tablet {
       font-size: 15px;
@@ -22,13 +22,12 @@
   }
 
   &__element_active {
-    background-color: #51c48c;
+    background-color: $green;
     padding: 7px;
-    color: white;
-    font-family: Akrobat-Thin, sans-serif;
+    border-radius: 10px;
+    color: $white;
     font-size: 30px;
     font-weight: 600;
-    border-radius: 10px;
 
     @include tablet {
       font-size: 15px;
@@ -38,7 +37,6 @@
   &__element_invisible {
     visibility: hidden;
     padding: 7px;
-    font-family: Akrobat-Thin, sans-serif;
     font-size: 30px;
     font-weight: 600;
 

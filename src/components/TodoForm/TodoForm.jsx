@@ -5,8 +5,6 @@ import { doneTodos } from '../..//store/todoSlice';
 import Input from '../Input/Input';
 import Checkbox from '../Checkbox/Checkbox';
 
-import cx from 'classnames';
-
 import s from './TodoForm.module.scss';
 
 const TodoForm = ({ text, handleInput, addTodo }) => {
@@ -30,18 +28,18 @@ const TodoForm = ({ text, handleInput, addTodo }) => {
   return (
     <div className={s.root}>
       {todos.length !== 0 && (
-        <label className={cx(s.checkAllTask)}>
+        <label className={s.checkAllTask}>
           <Checkbox
-            className={cx(s.checkAllTask__customButton)}
+            className={s.checkAllTask__customButton}
             onchange={(event) => doneTodosHandler(event)}
             checked={doneTodosAll}
           />
-          <span className={cx(s.checkAllTask__arrowButton)}></span>
+          <span className={s.checkAllTask__arrowButton}></span>
         </label>
       )}
-      <form className={cx(s.formGroup)} onSubmit={onSubmitHandler}>
+      <form className={s.formGroup} onSubmit={onSubmitHandler}>
         <Input
-          className={cx(s.formGroup__taskInput)}
+          className={s.formGroup__taskInput}
           placeholder="What needs to be done?"
           value={text}
           onChange={(e) => handleInput(e.target.value)}
