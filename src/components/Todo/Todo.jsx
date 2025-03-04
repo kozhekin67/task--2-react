@@ -21,6 +21,11 @@ const Todo = ({ id, text, done }) => {
     setNewText(text);
   };
 
+  const doubleClickHandler = () => openingEditorHandler(id);
+  const doneTodoHandler = () => dispatch(doneTodo({ id }));
+  const deleteTodoHandler = () => dispatch(deleteTodo({ id }));
+  const modifiedTextHandler = (event) => setNewText(event.target.value);
+
   const [newText, setNewText] = useState(text);
 
   const editTextTodoHandler = (id, newText) => {
@@ -51,21 +56,18 @@ const Todo = ({ id, text, done }) => {
   };
 
   return (
-    <div className={cx(done ? s.task_done : s.task)}>
+    <div className={cx(s.task, { [s.task_done]: done })}>
       <label className={s.customCheckbox}>
-        <Checkbox
-          className={s.checkbox}
-          onchange={() => dispatch(doneTodo({ id }))}
-        />
+        <Checkbox className={s.checkbox} onChange={doneTodoHandler} />
         <p className={s.checkboxBlock}></p>
       </label>
-      <div className={s.text} onDoubleClick={() => openingEditorHandler(id)}>
+      <div className={s.text} onDoubleClick={doubleClickHandler}>
         {text}
         {taskEditor === id && (
           <Textarea
             className={s.editTodo}
             value={newText}
-            onChange={(event) => setNewText(event.target.value)}
+            onChange={modifiedTextHandler}
             onKeyDown={handleKeyDown}
             onBlur={closingEditor}
             autoFocus
@@ -76,7 +78,7 @@ const Todo = ({ id, text, done }) => {
       <Button
         className={s.delete}
         image={<Delete className={s.delete__icon} />}
-        onClick={() => dispatch(deleteTodo({ id }))}
+        onClick={deleteTodoHandler}
       />
     </div>
   );

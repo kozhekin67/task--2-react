@@ -4,13 +4,13 @@ import cx from 'classnames';
 
 import s from './Checkbox.module.scss';
 
-const Checkbox = ({ className, id, onchange, checked, type = 'checkbox' }) => {
+const Checkbox = ({ className, id, onChange, checked, type = 'checkbox' }) => {
   return (
     <input
       id={id}
       type={type}
       className={cx(s.root, className)}
-      onChange={onchange}
+      onChange={onChange}
       checked={checked}
     />
   );

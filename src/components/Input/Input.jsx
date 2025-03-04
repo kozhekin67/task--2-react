@@ -9,10 +9,10 @@ const Input = (props) => {
 
   return (
     <input
-      {...props}
       className={cx(s.root, className)}
       placeholder={placeholder}
       type={type}
+      {...props}
     />
   );
 };

@@ -11,9 +11,9 @@
     padding: 0 20px 0 70px;
     font-size: 40px;
     font-weight: 400;
+    word-break: break-all;
     border: 2px solid #51c48c;
     border-radius: 10px;
-    word-break: break-all;
 
     @include tablet {
       height: 40px;
@@ -38,9 +38,9 @@
     left: 50%;
     width: 25px;
     height: 25px;
-    cursor: pointer;
     opacity: 0;
     transform: translate(-50%, -50%);
+    cursor: pointer;
   }
 
   &__arrowButton {

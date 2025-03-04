@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import cx from 'classnames';
 
 import {
   addTodo,
@@ -14,7 +15,6 @@ import TodosActions from './components/TodosActions/TodosActions';
 
 import './styles/reset.scss';
 import './styles/globals.scss';
-import cx from 'classnames';
 
 import s from './App.module.scss';
 

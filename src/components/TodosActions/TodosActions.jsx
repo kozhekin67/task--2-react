@@ -12,44 +12,38 @@ const TodosActions = ({
   filter,
   filterTodos,
 }) => {
+  const filterTodosHandler = (filter) => () => filterTodos(filter);
+
   return (
     <div className={s.bottomPanel}>
       <div className={s.bottomPanel__element}>
         <span>{`Items left ${todosCounter}`}</span>
       </div>
       <Button
-        className={cx(
-          filter === 'all'
-            ? s.bottomPanel__element_active
-            : s.bottomPanel__element
-        )}
+        className={cx(s.bottomPanel__element, {
+          [s.bottomPanel__element_active]: filter === 'all',
+        })}
         text="All"
-        onClick={() => filterTodos('all')}
+        onClick={filterTodosHandler('all')}
       />
       <Button
-        className={cx(
-          filter === 'active'
-            ? s.bottomPanel__element_active
-            : s.bottomPanel__element
-        )}
+        className={cx(s.bottomPanel__element, {
+          [s.bottomPanel__element_active]: filter === 'active',
+        })}
         text="Active"
-        onClick={() => filterTodos('active')}
+        onClick={filterTodosHandler('active')}
       />
       <Button
-        className={cx(
-          filter === 'completed'
-            ? s.bottomPanel__element_active
-            : s.bottomPanel__element
-        )}
+        className={cx(s.bottomPanel__element, {
+          [s.bottomPanel__element_active]: filter === 'completed',
+        })}
         text="Completed"
-        onClick={() => filterTodos('completed')}
+        onClick={filterTodosHandler('completed')}
       />
       <Button
-        className={cx(
-          donetodosCounter
-            ? s.bottomPanel__element
-            : s.bottomPanel__element_invisible
-        )}
+        className={cx(s.bottomPanel__element, {
+          [s.bottomPanel__element_invisible]: !donetodosCounter,
+        })}
         text="Clear completed"
         onClick={deleteDoneTodos}
       />

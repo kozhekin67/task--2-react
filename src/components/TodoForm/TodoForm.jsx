@@ -11,6 +11,7 @@ const TodoForm = ({ text, handleInput, addTodo }) => {
   const todos = useSelector((state) => state.todos.todos);
   const dispatch = useDispatch();
 
+  const addTodoTextHandler = (event) => handleInput(event.target.value);
   const doneTodosHandler = (event) => {
     dispatch(doneTodos({ checked: event.target.checked }));
   };
@@ -31,7 +32,7 @@ const TodoForm = ({ text, handleInput, addTodo }) => {
         <label className={s.checkAllTask}>
           <Checkbox
             className={s.checkAllTask__customButton}
-            onchange={(event) => doneTodosHandler(event)}
+            onChange={doneTodosHandler}
             checked={doneTodosAll}
           />
           <span className={s.checkAllTask__arrowButton}></span>
@@ -42,7 +43,7 @@ const TodoForm = ({ text, handleInput, addTodo }) => {
           className={s.formGroup__taskInput}
           placeholder="What needs to be done?"
           value={text}
-          onChange={(e) => handleInput(e.target.value)}
+          onChange={addTodoTextHandler}
         />
       </form>
     </div>
