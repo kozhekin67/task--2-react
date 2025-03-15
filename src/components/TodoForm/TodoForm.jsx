@@ -1,28 +1,31 @@
 import { React } from 'react';
+import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { doneTodos } from '../..//store/todoSlice';
+import { addTodo, doneTodos } from '../..//store/todoSlice';
 import Input from '../Input/Input';
 import Checkbox from '../Checkbox/Checkbox';
 
 import s from './TodoForm.module.scss';
 
-const TodoForm = ({ text, handleInput, addTodo }) => {
+const TodoForm = () => {
   const todos = useSelector((state) => state.todos.todos);
   const dispatch = useDispatch();
 
-  const addTodoTextHandler = (event) => handleInput(event.target.value);
   const doneTodosHandler = (event) => {
     dispatch(doneTodos({ checked: event.target.checked }));
   };
 
   const doneTodosAll = todos.length > 0 && todos.every((todo) => todo.done);
 
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-    if (text.trim() !== '') {
-      addTodo(text);
-      handleInput('');
+  const addTodoHandler = (text) => {
+    dispatch(addTodo({ text }));
+  };
+
+  const onsubmitHandler = (values, { resetForm }) => {
+    if (values.enteringTask.trim() !== '') {
+      addTodoHandler(values.enteringTask);
+      resetForm();
     }
   };
 
@@ -38,14 +41,20 @@ const TodoForm = ({ text, handleInput, addTodo }) => {
           <span className={s.checkAllTask__arrowButton}></span>
         </label>
       )}
-      <form className={s.formGroup} onSubmit={onSubmitHandler}>
-        <Input
-          className={s.formGroup__taskInput}
-          placeholder="What needs to be done?"
-          value={text}
-          onChange={addTodoTextHandler}
-        />
-      </form>
+
+      <Formik initialValues={{ enteringTask: '' }} onSubmit={onsubmitHandler}>
+        {({ values, handleChange }) => (
+          <Form className={s.formGroup}>
+            <Input
+              name="enteringTask"
+              className={s.formGroup__taskInput}
+              placeholder="What needs to be done?"
+              value={values.enteringTask}
+              onChange={handleChange}
+            />
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

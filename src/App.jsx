@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cx from 'classnames';
 
 import {
-  addTodo,
   deleteDoneTodos,
   setFilter,
   selectFilteredTodos,
@@ -19,16 +18,10 @@ import './styles/globals.scss';
 import s from './App.module.scss';
 
 function App() {
-  const [text, setText] = useState('');
-
   const todos = useSelector((state) => state.todos.todos);
   const filter = useSelector((state) => state.todos.filter);
   const filteredTodos = useSelector(selectFilteredTodos);
   const dispatch = useDispatch();
-
-  const addTodoHandler = () => {
-    dispatch(addTodo({ text }));
-  };
 
   const deleteDoneTodosHandler = () => {
     dispatch(deleteDoneTodos());
@@ -42,7 +35,7 @@ function App() {
   return (
     <div className={cx(s.App)}>
       <h1 className={cx(s.App__title)}>Todo List</h1>
-      <TodoForm addTodo={addTodoHandler} text={text} handleInput={setText} />
+      <TodoForm />
       <TodoList todos={filteredTodos} />
       {todos.length > 0 && (
         <TodosActions
