@@ -1,4 +1,5 @@
 @import 'src/styles/mixins.scss';
+@import 'src/styles/colors.scss';
 
 .root {
   position: relative;
@@ -12,7 +13,7 @@
     font-size: 40px;
     font-weight: 400;
     word-break: break-all;
-    border: 2px solid #51c48c;
+    border: 2px solid $green;
     border-radius: 10px;
 
     @include tablet {
@@ -47,7 +48,7 @@
     display: inline-block;
     width: 15px;
     height: 15px;
-    border: solid 2px black;
+    border: solid 2px $black;
     border-top: none;
     border-left: none;
     pointer-events: none;
@@ -62,7 +63,7 @@
   }
 
   &__customButton:checked + &__arrowButton {
-    border: solid 2px #51c48c;
+    border: solid 2px $green;
     border-top: none;
     border-left: none;
     transform: rotate(45deg) scale(1.3);
