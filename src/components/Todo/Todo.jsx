@@ -12,11 +12,12 @@ import Textarea from '../Textarea/Textarea';
 import s from './Todo.module.scss';
 
 const Todo = ({ id, text, done }) => {
-  const [taskEditor, setTaskEditor] = useState(null);
+  const [taskEditorId, setTaskEditorId] = useState(null);
+  const [newText, setNewText] = useState(text);
 
   const dispatch = useDispatch();
   const openingEditorHandler = (id) => {
-    setTaskEditor(id);
+    setTaskEditorId(id);
     formattedText(text);
     setNewText(text);
   };
@@ -25,8 +26,6 @@ const Todo = ({ id, text, done }) => {
   const doneTodoHandler = () => dispatch(doneTodo({ id }));
   const deleteTodoHandler = () => dispatch(deleteTodo({ id }));
   const modifiedTextHandler = (event) => setNewText(event.target.value);
-
-  const [newText, setNewText] = useState(text);
 
   const editTextTodoHandler = (id, newText) => {
     dispatch(editTextTodo({ id, newText: formattedText(newText) }));
@@ -63,7 +62,7 @@ const Todo = ({ id, text, done }) => {
       </label>
       <div className={s.text} onDoubleClick={doubleClickHandler}>
         {text}
-        {taskEditor === id && (
+        {taskEditorId === id && (
           <Textarea
             className={s.editTodo}
             value={newText}

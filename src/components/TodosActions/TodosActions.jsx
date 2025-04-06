@@ -12,8 +12,6 @@ const TodosActions = ({
   filter,
   filterTodos,
 }) => {
-  const filterTodosHandler = (filter) => () => filterTodos(filter);
-
   return (
     <div className={s.bottomPanel}>
       <div className={s.bottomPanel__element}>
@@ -24,21 +22,24 @@ const TodosActions = ({
           [s.bottomPanel__element_active]: filter === 'all',
         })}
         text="All"
-        onClick={filterTodosHandler('all')}
+        onClick={filterTodos}
+        cbData="all"
       />
       <Button
         className={cx(s.bottomPanel__element, {
           [s.bottomPanel__element_active]: filter === 'active',
         })}
         text="Active"
-        onClick={filterTodosHandler('active')}
+        onClick={filterTodos}
+        cbData="active"
       />
       <Button
         className={cx(s.bottomPanel__element, {
           [s.bottomPanel__element_active]: filter === 'completed',
         })}
         text="Completed"
-        onClick={filterTodosHandler('completed')}
+        onClick={filterTodos}
+        cbData="completed"
       />
       <Button
         className={cx(s.bottomPanel__element, {
