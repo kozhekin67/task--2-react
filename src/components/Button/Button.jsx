@@ -13,9 +13,9 @@ const Button = ({
   cbData,
 }) => {
   const handleClick = useCallback(
-    () => {
+    (e) => {
       if (onClick) {
-        onClick( cbData);
+        onClick(e, cbData);
       }
     },
     [cbData, onClick]

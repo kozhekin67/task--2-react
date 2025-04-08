@@ -30,7 +30,7 @@ function App() {
   const todosCounterHandler = todos.filter((todo) => !todo.done).length;
   const doneTodosCounterHandler = todos.filter((todo) => todo.done).length;
 
-  const filterTodosHandler = (newFilter) => dispatch(setFilter(newFilter));
+  const filterTodosHandler = (e, newFilter) => dispatch(setFilter(newFilter));
 
   return (
     <div className={cx(s.App)}>
